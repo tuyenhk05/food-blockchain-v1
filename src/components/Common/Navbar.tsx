@@ -4,28 +4,35 @@ import { Menu, X, LayoutDashboard, Package, Link as LinkIcon, Users, Search, Che
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const isActive = (path: string) => location.pathname === path;
-  const navLinks = [{
-    path: '/admin',
-    label: 'Tổng Quan',
-    icon: LayoutDashboard
-  }, {
-    path: '/admin/shipments',
-    label: 'Quản Lý Lô Hàng',
-    icon: Package
-  }, {
-    path: '/admin/blockchain',
-    label: 'Blockchain',
-    icon: LinkIcon
-  }, {
-    path: '/admin/confirmed-orders',
-    label: 'Đơn Đã Xác Nhận',
-    icon: CheckCircle
-  }, {
-    path: '/admin/users',
-    label: 'Người Dùng',
-    icon: Users
-  }];
+    const isActive = (path: string) => location.pathname === path;
+    const isAdminPath = location.pathname.startsWith('/admin');
+    console.log(isAdminPath);
+    const navLinks = isAdminPath ? (
+        [{
+            path: '/admin',
+            label: 'Tổng Quan',
+            icon: LayoutDashboard
+        }, {
+                path: '/admin/shipments',
+                label: 'Quản Lý Lô Hàng',
+                icon: Package
+            }, {
+                path: '/admin/blockchain',
+                label: 'Blockchain',
+                icon: LinkIcon
+            }, {
+                path: '/admin/confirmed-orders',
+                label: 'Đơn Đã Xác Nhận',
+                icon: CheckCircle
+            }, {
+                path: '/admin/users',
+                label: 'Người Dùng',
+                icon: Users
+            }]
+
+    ): (
+        []
+        );
   return <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
