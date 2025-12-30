@@ -52,7 +52,7 @@ const chartData = [
 export function AdminDashboard() {
   const navigate = useNavigate();
   const handleAlertClick = (batchId: string) => {
-    navigate(`/shipments?search=${batchId}`);
+    navigate(`shipments?search=${batchId}`);
   };
   return (
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
