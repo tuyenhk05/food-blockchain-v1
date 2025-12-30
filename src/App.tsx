@@ -8,6 +8,8 @@ import { ShipmentManagement } from "./pages/Admin/ShipmentManagement";
 import { BlockchainMonitoring } from "./pages/Admin/BlockchainMonitoring";
 import { UserManagement } from "./pages/Admin/UserManagement";
 import { ConfirmedOrders } from "./pages/Admin/ConfirmedOrders";
+import { NewsPage } from "./components/User/NewsPage";
+import { NewsDetailPage } from "./components/User/NewsDetailPage";
 export function App() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
@@ -23,6 +25,9 @@ export function App() {
         <Route path="/admin/blockchain" element={<BlockchainMonitoring />} />
         <Route path="/admin/confirmed-orders" element={<ConfirmedOrders />} />
         <Route path="/admin/users" element={<UserManagement />} />
+
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/:id" element={<NewsDetailPage />} />
       </Routes>
     </div>
   );

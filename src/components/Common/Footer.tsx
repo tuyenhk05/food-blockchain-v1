@@ -36,11 +36,7 @@ export function Footer() {
                 Truy xuất
               </a>
             </li>
-            <li>
-              <a href="/admin" className="hover:text-white transition">
-                Quản trị
-              </a>
-            </li>
+
             <li>
               <a href="/admin/users" className="hover:text-white transition">
                 Người dùng

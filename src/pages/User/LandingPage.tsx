@@ -5,6 +5,8 @@ import { FeatureCard } from "../../components/Common/FeatureCard";
 import { motion } from "framer-motion";
 import { Footer } from "../../components/Common/Footer";
 import { TemperatureChart } from "../../components/Common/TemperatureChart";
+import { NewsPreviewSection } from "../../components/User/NewsPreviewSection";
+import { Link } from "react-router-dom";
 export function LandingPage() {
   return (
     <div className="min-h-[calc(100vh-64px)] bg-gray-50">
@@ -197,6 +199,40 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+      {/* Giới thiệu hệ thống */}
+      <section className="bg-[#ECFDF5] py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-200">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Minh Bạch Chuỗi Cung Ứng Nông Sản
+          </h2>
+          <p className="text-gray-600 text-lg leading-relaxed">
+            AgriTrust là nền tảng ứng dụng <strong>Blockchain</strong> và{" "}
+            <strong>IoT</strong> để truy xuất nguồn gốc thực phẩm từ nông trại
+            đến bàn ăn. <br /> Chúng tôi cam kết mang đến sự minh bạch, an toàn
+            và niềm tin cho người tiêu dùng thông qua dữ liệu thời gian thực và
+            tin tức cập nhật liên tục.
+          </p>
+          <div className="mt-8">
+            <Link
+              to="/news"
+              className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-lg text-base font-medium hover:bg-emerald-500 transition"
+            >
+              Xem Tin Tức Mới Nhất →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Tin Tức */}
+      <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Tin Tức & Cập Nhật
+          </h2>
+          <NewsPreviewSection />
+        </div>
+      </section>
+
       {/* IoT Data Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-200">
         <div className="max-w-5xl mx-auto text-center">
