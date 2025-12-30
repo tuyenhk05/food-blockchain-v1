@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
-import { CheckCircle, Search, Filter, ExternalLink, Calendar, MapPin, Package } from 'lucide-react';
-import { mockBatches, Batch } from '../data/mockData';
-import { OrderDetailsModal } from '../components/OrderDetailsModal';
+import React, { useState } from "react";
+import {
+  CheckCircle,
+  Search,
+  Filter,
+  ExternalLink,
+  Calendar,
+  MapPin,
+  Package,
+} from "lucide-react";
+import { mockBatches, Batch } from "../../data/mockData";
+import { OrderDetailsModal } from "../../components/Admin/OrderDetailsModal";
 export function ConfirmedOrders() {
   const [selectedBatch, setSelectedBatch] = useState<Batch | null>(null);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("");
   // Filter only delivered/confirmed orders
-  const confirmedBatches = mockBatches.filter(batch => batch.currentStatus === 'Delivered' && (batch.batchId.toLowerCase().includes(filter.toLowerCase()) || batch.product.toLowerCase().includes(filter.toLowerCase())));
-  return <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+  const confirmedBatches = mockBatches.filter(
+    (batch) =>
+      batch.currentStatus === "Delivered" &&
+      (batch.batchId.toLowerCase().includes(filter.toLowerCase()) ||
+        batch.product.toLowerCase().includes(filter.toLowerCase()))
+  );
+  return (
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto space-y-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -24,7 +38,13 @@ export function ConfirmedOrders() {
         <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col sm:flex-row gap-4 justify-between items-center">
           <div className="relative w-full sm:w-96">
             <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
-            <input type="text" placeholder="Tìm kiếm theo mã đơn hoặc tên sản phẩm..." className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" value={filter} onChange={e => setFilter(e.target.value)} />
+            <input
+              type="text"
+              placeholder="Tìm kiếm theo mã đơn hoặc tên sản phẩm..."
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            />
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <Filter className="w-4 h-4" />
@@ -59,10 +79,17 @@ export function ConfirmedOrders() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {confirmedBatches.map(batch => {
-                const verifiedCount = batch.stages.filter(s => s.blockchain.verified).length;
-                const lastStage = batch.stages[batch.stages.length - 1];
-                return <tr key={batch.batchId} className="hover:bg-gray-50 transition-colors cursor-pointer group" onClick={() => setSelectedBatch(batch)}>
+                {confirmedBatches.map((batch) => {
+                  const verifiedCount = batch.stages.filter(
+                    (s) => s.blockchain.verified
+                  ).length;
+                  const lastStage = batch.stages[batch.stages.length - 1];
+                  return (
+                    <tr
+                      key={batch.batchId}
+                      className="hover:bg-gray-50 transition-colors cursor-pointer group"
+                      onClick={() => setSelectedBatch(batch)}
+                    >
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-2">
                           <Package className="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition-colors" />
@@ -91,8 +118,18 @@ export function ConfirmedOrders() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-2">
                           <div className="flex -space-x-1">
-                            {[...Array(verifiedCount)].map((_, i) => <div key={i} className="w-2 h-4 bg-emerald-400 rounded-sm transform skew-x-12 border-r border-white" />)}
-                            {[...Array(4 - verifiedCount)].map((_, i) => <div key={i} className="w-2 h-4 bg-gray-200 rounded-sm transform skew-x-12 border-r border-white" />)}
+                            {[...Array(verifiedCount)].map((_, i) => (
+                              <div
+                                key={i}
+                                className="w-2 h-4 bg-emerald-400 rounded-sm transform skew-x-12 border-r border-white"
+                              />
+                            ))}
+                            {[...Array(4 - verifiedCount)].map((_, i) => (
+                              <div
+                                key={i}
+                                className="w-2 h-4 bg-gray-200 rounded-sm transform skew-x-12 border-r border-white"
+                              />
+                            ))}
                           </div>
                           <span className="text-xs text-gray-500 font-medium">
                             {verifiedCount}/4 Giai đoạn
@@ -104,18 +141,26 @@ export function ConfirmedOrders() {
                           <ExternalLink className="w-4 h-4" />
                         </button>
                       </td>
-                    </tr>;
-              })}
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
 
-          {confirmedBatches.length === 0 && <div className="p-12 text-center text-gray-500">
+          {confirmedBatches.length === 0 && (
+            <div className="p-12 text-center text-gray-500">
               Không tìm thấy đơn hàng nào phù hợp.
-            </div>}
+            </div>
+          )}
         </div>
       </div>
 
-      <OrderDetailsModal batch={selectedBatch} isOpen={!!selectedBatch} onClose={() => setSelectedBatch(null)} />
-    </div>;
+      <OrderDetailsModal
+        batch={selectedBatch}
+        isOpen={!!selectedBatch}
+        onClose={() => setSelectedBatch(null)}
+      />
+    </div>
+  );
 }
